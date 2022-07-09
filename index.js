@@ -1,5 +1,4 @@
 import { exec } from 'child_process';
-import { readFileSync, unlink } from "fs";
 import fs from "fs";
 import express from "express";
 import cors from "cors";
@@ -13,13 +12,14 @@ const app = express();
 app.use(cors())
 app.use(express.json());
 
+/*
 app.get("/data", (req, res) => {
     res.send({
         firstName: "Rabo",
         lastName: "Madoyan"
     });
 });
-
+*/
 
 app.post("/", (req, res) => {
     let data ="";
@@ -70,7 +70,7 @@ app.post("/", (req, res) => {
             function cer() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
-                        return resolve (createCert());},1500);
+                        return resolve (createCert());},2800);
                     });
                 }
             

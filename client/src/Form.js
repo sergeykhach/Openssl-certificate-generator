@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-//import KeyForm from "./KeyForm";
 import Pahatexty from "./SaveTextFunc";
+import Pahatext from "./SavePahatext";
+import Pahatex from "./SavePahatex";
 
 function Form() {
 
@@ -11,28 +12,28 @@ function Form() {
   const [organizationunitname, setorganizationunitname] = useState("");
   const [commonname, setcommonname] = useState("");
   const [email, setemail] = useState("");
-  //const [countryname, setcountryname] = useState("");
   const [message, setMessage] = useState("");
   const [keyText, setKeyText] = useState([]);
   const [csrText, setCsrText] = useState([]);
   const [certText, setCertText] = useState([]);
 
   const options = [
-    {value: '', text: '--Choose an option--'},
+    {value: "1024", text: "--Choose an option--"},
     {value: "2048", text: "2048"},
     {value: "3072", text: "3072"},
     {value: "4096", text: "4096"},
     {value: "6144", text: "6144"},
-    {value: "8192", text: "8192"},
   ];
-
+  
+  //takiny menuyi select blokinna
   const [selected, setSelected] = useState(options[0].value);
   const handleChange = event => {
-      setSelected(event.target.value);
+       setSelected(event.target.value);
   };
 
+  //vor handle submiti popoxutyany mi arajin angma reakcia ta
   useEffect(() => {
-    handleSubmit();
+      handleSubmit();
   }, []);
 
   let handleSubmit = async (e) => {
@@ -56,6 +57,7 @@ function Form() {
         alert(res.email);
       });
       */
+     //use effekti ardyunqum stanalu paragayum nor textera set anum
       let resJson = await res.json();
       setKeyText(resJson.keyText);
       setCsrText(resJson.csrText);
@@ -74,7 +76,7 @@ function Form() {
         setcommonname("");
         setemail("");
         setSelected("");
-        setMessage("Your data has been successfully created and posted, get and save your keys and certificate as you wish below ");
+        setMessage("Your data has been successfully created, get or save your key and certificate as you wish below");
       } /*else {
         setMessage("Some error occured");
       }*/
@@ -84,8 +86,10 @@ function Form() {
     }     
   };
 
+  // loadinga grelu texteri poxaren ete undefined arjq linen textery
   if (keyText === csrText === certText === undefined) return <div>Loading...</div>
 
+  //nkaruma sagh forman ira changerov
   return (
     <div>  
       <div className = "Form">
@@ -141,7 +145,7 @@ function Form() {
               <br/>  
               <label>RSA Key Size:</label>
               <div>
-              <select  value={selected} onChange={handleChange}>
+              <select id="selectmenu" value={selected} onChange={handleChange}>
               {options.map(option => (
                   <option key={option.value} value={option.value}>
                     {option.text}
@@ -150,24 +154,24 @@ function Form() {
               </select>
               </div>
               <br/> 
-              <button type="submit">Click to generate Key, CSR and Cerificate</button>
+              <button id="button" type="submit">Click once and wait for a second to generate Key, CSR and Cerificate</button>
               <div className="message">{message ? <p>{message}</p> : null}</div>
           </form>           
       </div>  
         <div>
             <p id="keyHead">Hear will be the Key file text</p>
-            <textarea id="keyText"  rows="8" cols="50" value={keyText}></textarea>
-            <input type="button" value="Click to save the text in the key file" onClick={Pahatexty}></input>
+            <textarea id="keyTxt"  rows="10" cols="70" value={keyText}></textarea>
+            <input id="textsave" type="button" value="Click to save the text in the key file" onClick= {Pahatexty}></input>
         </div>   
         <div>
             <p id="keyHead">Hear will be the CSR file text</p>
-            <textarea id="keyText"  rows="8" cols="50" value={csrText}></textarea>
-            <input type="button" value="Click to save the text in the CSR file" onClick={Pahatexty}></input>
+            <textarea id="csrTxt"  rows="10" cols="70" value={csrText}></textarea>
+            <input id="textsave" type="button" value="Click to save the text in the CSR file" onClick={Pahatext}></input>
         </div>  
         <div>
             <p id="keyHead">Hear will be the Certificate file text</p>
-            <textarea id="keyText"  rows="8" cols="50" value={certText}></textarea>
-            <input type="button" value="Click to save the text in the certificate file" onClick={Pahatexty}></input>
+            <textarea id="certTxt"  rows="10" cols="70" value={certText}></textarea>
+            <input id="textsave" type="button" value="Click to save the text in the certificate file" onClick={Pahatex}></input>
         </div>          
     </div>
   )

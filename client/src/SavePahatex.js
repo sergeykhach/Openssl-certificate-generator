@@ -1,8 +1,8 @@
 //import {fileOpen, directoryOpen,fileSave,supported} from 'https://unpkg.com/browser-fs-access';
 
-async function Pahatexty() {
+async function Pahatex() {
         
-  var userInput = document.getElementById("keyTxt").value;
+  var userInput = document.getElementById("certTxt").value;
   var blob = new Blob([userInput], { type: "text/plain;charset=utf-8" });
       const fileHandle = await window.showSaveFilePicker();
       // const fileHandle = await window.chooseFileSystemEntries();
@@ -11,6 +11,6 @@ async function Pahatexty() {
       await fileStream.close();
 }
 
-window.Pahatexty=Pahatexty;
+window.Pahatex=Pahatex;
 
-export default Pahatexty;
+export default Pahatex;

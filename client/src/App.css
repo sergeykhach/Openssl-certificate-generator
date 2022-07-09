@@ -1,0 +1,78 @@
+.App{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    align-content: center;
+    margin-top: 30px;
+    font-size: 18px;
+    font-family: arial;
+    font-weight: bold;
+    color: rgb(100, 5, 5);
+  }
+
+  .Vernagir{
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .VernagriTak{
+    margin-top: 0px;
+  }
+  
+  .App > #name, #countryname, #statename, #localityname, #organizationname, #email, #organizationunitname, #commonname, #selectmenu {
+    width: 300px;
+    height: 30px;
+    background-color:white;
+    font-size: 18px;
+    font-family: arial;
+    font-weight: bold;
+    border:2px solid rgb(100, 5, 5);
+    border-radius: 7px; 
+    color:rgb(100, 5, 5) 
+  }
+  
+   #keyTxt, #csrTxt, #certTxt { 
+
+    background-color:white;
+    font-size: 12px;
+    font-family: arial;
+    font-weight: bold;
+    border:2px solid rgb(100, 5, 5);
+    border-radius: 7px; 
+    color:rgb(100, 5, 5) 
+  }
+
+  #button, #textsave { 
+
+    background-color:white;
+    font-size: 18px;
+    font-family: arial;
+    font-weight: bold;
+    border:2px solid rgb(100, 5, 5);
+    border-radius: 7px; 
+    color:rgb(100, 5, 5); 
+   
+  }
+
+  #button:hover{
+    font-size: 19px;
+    color: rgb(56, 4, 4);
+  }
+
+  #textsave:hover{
+    font-size: 19px;
+    color: rgb(56, 4, 4);
+  }
+
+  #button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  #textsave:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  

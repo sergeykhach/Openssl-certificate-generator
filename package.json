@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serverDev": "nodemon --require dotenv/config index.js"
+    "serverDev": "nodemon -L --require dotenv/config index.js"
   },
   "keywords": [],
   "author": "",
