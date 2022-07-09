@@ -9,6 +9,8 @@ const fileCert = "cert.pem";
 
 const app = express();
 
+app.use(express.static("./client/build"));
+
 app.use(cors())
 app.use(express.json());
 
