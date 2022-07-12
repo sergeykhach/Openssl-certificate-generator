@@ -2,6 +2,7 @@ import { exec } from 'child_process';
 import fs from "fs";
 import express from "express";
 import cors from "cors";
+import path from 'path';
 
 const fileCsr = "nor.csr";
 const fileKey = "hhhg.key";
@@ -9,7 +10,11 @@ const fileCert = "cert.pem";
 
 const app = express();
 
-app.use(express.static("./client/build"));
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 app.use(cors())
 app.use(express.json());
