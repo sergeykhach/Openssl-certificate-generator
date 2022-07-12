@@ -39,7 +39,7 @@ function Form() {
   let handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        let res = await fetch("http://localhost:5000/", {
+        let res = await fetch("http://localhost:60000/", {
           method: "POST",
           body: JSON.stringify({
               countryname: countryname,
