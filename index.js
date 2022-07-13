@@ -1,9 +1,12 @@
 import { exec } from 'child_process';
 import fs from "fs";
+import { fileURLToPath } from 'url'; 
 import express from "express";
 import cors from "cors";
 import path from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const fileCsr = "nor.csr";
 const fileKey = "hhhg.key";
 const fileCert = "cert.pem";
@@ -155,4 +158,4 @@ app.post("/", (req, res) => {
     res.send("Stacel em Jsony");
 });
 */
-app.listen(process.env.PORT || 3003);
+app.listen(process.env.PORT || 60000);

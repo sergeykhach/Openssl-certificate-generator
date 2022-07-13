@@ -39,7 +39,7 @@ function Form() {
   let handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        let res = await fetch("http://localhost:60000/", {
+        let res = await fetch("https://khachoyan.com/certSelf", {
           method: "POST",
           body: JSON.stringify({
               countryname: countryname,
