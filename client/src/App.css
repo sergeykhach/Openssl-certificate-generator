@@ -30,7 +30,7 @@
     color:rgb(100, 5, 5) 
   }
   
-   #keyTxt, #csrTxt, #certTxt { 
+   #keyTxt, #csrTxt, #certTxt, #tprint, #serial { 
 
     background-color:white;
     font-size: 12px;

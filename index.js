@@ -13,10 +13,10 @@ const fileCert = "cert.pem";
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 
 app.use(cors())
@@ -46,6 +46,7 @@ app.post("/", (req, res) => {
         let organizationUnit = obj.organizationunitname;
         let commonName = obj.commonname;
         let emailAddress = obj.email;
+        let datas = [];
 
         function createCsr() {
             exec(`openssl req -new -newkey rsa:${RSA} -nodes -out ${fileCsr} -keyout ${fileKey} -subj "/C=${countryName}/ST=${stateOrProvinceName}/L=${localityName}/O=${organizationName}/OU=${organizationUnit}/CN=${commonName}/emailAddress=${emailAddress}"`, (error, stdout, stderr) => {
@@ -77,12 +78,58 @@ app.post("/", (req, res) => {
                 });
             }
             
+            function createThumbprint() { 
+                exec(`openssl x509 -in cert.pem -fingerprint -noout`, (error, stdout, stderr) => {
+                    if (error) {
+                    console.error(`error: ${error.message}`);
+                    return;
+                    }
+                
+                    if (stderr) {
+                    console.error(`stderr: ${stderr}`);
+                    return;
+                    }
+                    console.log(`stdout:\n${stdout}`);
+                    datas.push(`${stdout}`);
+                });
+            }
+            
+            function createSerialNumber() { 
+                exec(`openssl x509 -in cert.pem -serial -noout`, (error, stdout, stderr) => {
+                    if (error) {
+                    console.error(`error: ${error.message}`);
+                    return;
+                    }
+                
+                    if (stderr) {
+                    console.error(`stderr: ${stderr}`);
+                    return;
+                    }
+                    console.log(`stdout:\n${stdout}`);
+                    datas.push(`${stdout}`);
+                });
+            }
+
             function cer() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
                         return resolve (createCert());},2800);
                     });
                 }
+
+             function thumb() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        return resolve (createThumbprint());},2900);
+                    });
+                }
+                
+            function seria() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                            return resolve (createSerialNumber());},2900);
+                        });
+                }    
             
             function kardaFile (fileName) {
                 return new Promise((resolve, reject) => {
@@ -105,8 +152,7 @@ app.post("/", (req, res) => {
                                     }
                                 }));},500);
                         });
-                    }
-            let datas = [];
+                    }            
             
             async function verj () { 
                   
@@ -114,6 +160,10 @@ app.post("/", (req, res) => {
                    
                    await cer()            
             
+                   await thumb()
+
+                   await seria()       
+                   
                    await kardaFile(fileKey)
                     .then((readKey) => {
                         datas.push(readKey);
@@ -140,9 +190,11 @@ app.post("/", (req, res) => {
             
             verj().then((datas) => {
             res.send ({
-                keyText: (datas[0]),
-                csrText: datas[1],
-                certText: datas[2]
+                certThumbrint: datas[0],
+                certSerial:datas[1],
+                keyText: datas[2],
+                csrText: datas[3],
+                certText: datas[4] 
                 })                        
                 
             });           

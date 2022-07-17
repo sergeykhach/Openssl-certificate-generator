@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import Pahatexty from "./SaveTextFunc";
-import Pahatext from "./SavePahatext";
 import Pahatex from "./SavePahatex";
 
 function Form() {
@@ -16,6 +14,8 @@ function Form() {
   const [keyText, setKeyText] = useState([]);
   const [csrText, setCsrText] = useState([]);
   const [certText, setCertText] = useState([]);
+  const [thumbprint, setThumbprint] = useState([]);
+  const [serial, setSerial] = useState([]);
 
   const options = [
     {value: "1024", text: "--Choose an option--"},
@@ -62,6 +62,9 @@ function Form() {
       setKeyText(resJson.keyText);
       setCsrText(resJson.csrText);
       setCertText(resJson.certText);
+      setThumbprint(resJson.certThumbrint);
+      setSerial(resJson.certSerial);
+
       /*
       let keyText = resJson.keyCode;
       let csrText = resJson.email;
@@ -154,24 +157,34 @@ function Form() {
               </select>
               </div>
               <br/> 
-              <button id="button" type="submit">Click once and wait for a second to generate Key, CSR and Cerificate</button>
+              <button id="button" type="submit">Click once and wait a little to generate Key, CSR, Cerificate with Thumbprint and Serial number</button>
               <div className="message">{message ? <p>{message}</p> : null}</div>
           </form>           
       </div>  
-        <div>
-            <p id="keyHead">Hear will be the Key file text</p>
+      <div>
+            <p id="keyHead">Here is the Key file text</p>
             <textarea id="keyTxt"  rows="10" cols="70" value={keyText}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the key file" onClick= {Pahatexty}></input>
+            <input id="textsave" type="button" value="Click to save the text in the key file" onClick= {() => Pahatex("keyTxt")}></input>
         </div>   
         <div>
-            <p id="keyHead">Hear will be the CSR file text</p>
+            <p id="keyHead">Here is the CSR file text</p>
             <textarea id="csrTxt"  rows="10" cols="70" value={csrText}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the CSR file" onClick={Pahatext}></input>
+            <input id="textsave" type="button" value="Click to save the text in the CSR file" onClick={() => Pahatex("csrTxt")}></input>
         </div>  
         <div>
-            <p id="keyHead">Hear will be the Certificate file text</p>
+            <p id="keyHead">Here is the Certificate file text</p>
             <textarea id="certTxt"  rows="10" cols="70" value={certText}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the certificate file" onClick={Pahatex}></input>
+            <input id="textsave" type="button" value="Click to save the text in the certificate file" onClick={() => Pahatex("certTxt")}></input>
+        </div>
+        <div>
+            <p id="keyHead">Here is the Certificate's thumbprint</p>
+            <textarea id="tprint"  rows="4" cols="70" value={thumbprint}></textarea>
+            <input id="textsave" type="button" value="Click to save the text in the thumbprint file" onClick={() => Pahatex("tprint")}></input>
+        </div>
+        <div>
+            <p id="keyHead">Here is the Certificate's serial number </p>
+            <textarea id="serial"  rows="4" cols="70" value={serial}></textarea>
+            <input id="textsave" type="button" value="Click to save the text in the serial number file" onClick={() => Pahatex("serial")}></input>
         </div>          
     </div>
   )
