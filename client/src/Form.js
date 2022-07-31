@@ -1,5 +1,8 @@
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
+import ReactiveButton from 'reactive-button';
+import GetAccount from "./connectToMetamask";
 import Pahatex from "./SavePahatex";
+import Morali from "./sendtransaction";
 
 function Form() {
 
@@ -16,13 +19,16 @@ function Form() {
   const [certText, setCertText] = useState([]);
   const [thumbprint, setThumbprint] = useState([]);
   const [serial, setSerial] = useState([]);
+  const [receiver,setReceiver] = useState("");
+  const [knopka, setKnopka] = useState('idle');
+
 
   const options = [
     {value: "1024", text: "--Choose an option--"},
     {value: "2048", text: "2048"},
     {value: "3072", text: "3072"},
     {value: "4096", text: "4096"},
-    {value: "6144", text: "6144"},
+    
   ];
   
   //takiny menuyi select blokinna
@@ -36,10 +42,18 @@ function Form() {
       handleSubmit();
   }, []);
 
+  const onClickHandler = () => {
+    setKnopka('loading');
+    setTimeout(() => {
+        setKnopka('success');
+    }, 8000);
+  }
+
   let handleSubmit = async (e) => {
       e.preventDefault();
+      onClickHandler();
       try {
-        let res = await fetch("https://khachoyan.com/certSelf", {
+        let res = await fetch("https://khachoyan.com", {
           method: "POST",
           body: JSON.stringify({
               countryname: countryname,
@@ -79,7 +93,8 @@ function Form() {
         setcommonname("");
         setemail("");
         setSelected("");
-        setMessage("Your data has been successfully created, get or save your key and certificate as you wish below");
+        setMessage("Get or save your key, CSR and certificate with serial number and thumbprint below");
+       
       } /*else {
         setMessage("Some error occured");
       }*/
@@ -157,35 +172,100 @@ function Form() {
               </select>
               </div>
               <br/> 
-              <button id="button" type="submit">Click once and wait a little to generate Key, CSR, Cerificate with Thumbprint and Serial number</button>
+              
+              <ReactiveButton
+                  buttonState={knopka}
+                  color={'white'}
+                  idleText={'Click once and wait a little to generate Key, CSR, Cerificate with Thumbprint and Serial number'}
+                  loadingText={'Loading'}
+                  successText={'Your data has been successfully created'}
+                  errorText={'Error'}
+                  type={'submit'}
+                  className={'button'}
+                  style={{ borderRadius: '7px', 
+                    fontFamily: 'arial', 
+                    fontSize: '18px', 
+                    fontWeight: 'bold',
+                    color:'rgb(100, 5, 5)',
+                    border: 'solid 2px rgb(100, 5, 5)',
+                    background: 'white'                    
+                   }}
+                  outline={false}
+                  shadow={false}
+                  rounded={false}
+                  size={'large'}
+                  block={true}
+                  messageDuration={5000}
+                  disabled={false}
+                  buttonRef={null}
+                  width={null}
+                  height={null}
+                  animation={true}
+              />
+                            
               <div className="message">{message ? <p>{message}</p> : null}</div>
           </form>           
       </div>  
-      <div>
+        <div>
+          <div>{message ? <>
             <p id="keyHead">Here is the Key file text</p>
             <textarea id="keyTxt"  rows="10" cols="70" value={keyText}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the key file" onClick= {() => Pahatex("keyTxt")}></input>
+            <input id="textsave" type="button" value="Click to save the text in the key file" onClick= {() => Pahatex("keyTxt")}></input></>
+            : <><p id="keyHead">Here will be the Key file text</p>
+            <textarea id="keyTxt"  rows="10" cols="70" value={keyText}></textarea>
+            </>}
+          </div>
         </div>   
         <div>
+          <div>{message ? <>
             <p id="keyHead">Here is the CSR file text</p>
             <textarea id="csrTxt"  rows="10" cols="70" value={csrText}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the CSR file" onClick={() => Pahatex("csrTxt")}></input>
+            <input id="textsave" type="button" value="Click to save the text in the CSR file" onClick={() => Pahatex("csrTxt")}></input> </> 
+            : <><p id="keyHead">Here will be the CSR file text</p>
+            <textarea id="csrTxt"  rows="10" cols="70" value={csrText}></textarea>
+            </>}
+            </div>  
         </div>  
         <div>
+          <div>{message ? <>
             <p id="keyHead">Here is the Certificate file text</p>
             <textarea id="certTxt"  rows="10" cols="70" value={certText}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the certificate file" onClick={() => Pahatex("certTxt")}></input>
+            <input id="textsave" type="button" value="Click to save the text in the certificate file" onClick={() => Pahatex("certTxt")}></input></>
+            : <><p id="keyHead">Here will be the Certificate file text</p>
+            <textarea id="certTxt"  rows="10" cols="70" value={certText}></textarea>
+            </>}
+            </div> 
         </div>
         <div>
-            <p id="keyHead">Here is the Certificate's thumbprint</p>
-            <textarea id="tprint"  rows="4" cols="70" value={thumbprint}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the thumbprint file" onClick={() => Pahatex("tprint")}></input>
-        </div>
-        <div>
+          <div>{message ? <>
             <p id="keyHead">Here is the Certificate's serial number </p>
             <textarea id="serial"  rows="4" cols="70" value={serial}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the serial number file" onClick={() => Pahatex("serial")}></input>
-        </div>          
+            <input id="textsave" type="button" value="Click to save the text in the serial number file" onClick={() => Pahatex("serial")}></input></>
+            : <><p id="keyHead">Here will be the Certificate's serial number </p>
+            <textarea id="serial"  rows="4" cols="70" value={serial}></textarea>
+            </>}
+          </div> 
+        </div>   
+        <div>
+          <div>{message ? <>
+            <p id="keyHead">Here is the Certificate's thumbprint</p>
+            <textarea id="tprint"  rows="4" cols="70" value={thumbprint}></textarea>
+            <input id="textsave" type="button" value="Click to save the text in the thumbprint file" onClick={() => Pahatex("tprint")}></input></>
+            : <><p id="keyHead">Here will be the Certificate's thumbprint</p>
+            <textarea id="tprint"  rows="4" cols="70" value={thumbprint}></textarea>
+            </>}
+          </div> 
+        </div>
+        <br/>
+        <div>
+                
+          <h2>Connect to Metamask and send transaction</h2>
+          <input id="commonname" type="text" placeholder="Receiver's address (no spaces)" value={receiver} onChange={e => setReceiver(e.target.value)}/>
+          <input id="textsave" type="button" value="Click to connect to Metamask" onClick={() => GetAccount()}></input>
+          <input id="textsave" type="button" value="Click to send a transaction" onClick={() => {receiver ? Morali(receiver) && setReceiver("") : alert("Input receiver's address!")}}></input> 
+          
+        </div>
+      <br/>     
     </div>
   )
 }

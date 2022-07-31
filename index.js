@@ -113,21 +113,21 @@ app.post("/", (req, res) => {
             function cer() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
-                        return resolve (createCert());},2800);
+                        return resolve (createCert());},1500);
                     });
                 }
 
              function thumb() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
-                        return resolve (createThumbprint());},2900);
+                        return resolve (createThumbprint());},1700);
                     });
                 }
                 
             function seria() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
-                            return resolve (createSerialNumber());},2900);
+                            return resolve (createSerialNumber());},1800);
                         });
                 }    
             
@@ -136,7 +136,7 @@ app.post("/", (req, res) => {
                     setTimeout(() => {
                         let data = fs.readFileSync(fileName);
                         return resolve (
-                        data.toString());},500);
+                        data.toString());},60);
                     });
                 }
             
