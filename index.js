@@ -113,21 +113,21 @@ app.post("/", (req, res) => {
             function cer() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
-                        return resolve (createCert());},1500);
+                        return resolve (createCert());},1700);
                     });
                 }
 
              function thumb() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
-                        return resolve (createThumbprint());},1700);
+                        return resolve (createThumbprint());},1800);
                     });
                 }
                 
             function seria() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
-                            return resolve (createSerialNumber());},1800);
+                            return resolve (createSerialNumber());},1900);
                         });
                 }    
             

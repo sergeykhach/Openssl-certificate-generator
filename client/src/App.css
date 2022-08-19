@@ -1,82 +1,264 @@
 .App{
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: space-evenly;
-    align-content: center;
-    margin-top: 30px;
-    font-size: 18px;
-    font-family: arial;
-    font-weight: bold;
-    color: rgb(100, 5, 5);
-     /*nerqev background u gradient orang*/
-    background: rgb(131,58,180);
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,138,29,1) 0%, rgba(252,176,69,1) 100%);
+  display: grid;
+  flex-flow: column wrap;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  
+  font-size: 18px;
+  font-family: arial;
+  font-weight: bold;
+  color: rgb(100, 5, 5);
+  /*nerqev background u gradient orang*/
+  background: rgb(131,58,180);
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,138,29,1) 0%, rgba(252,176,69,1) 100%);
+ 
+}
+
+.Vernagir{
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.VernagriTak{
+  margin-top: 0px;
+}
+
+.App > #name, #countryname, #statename, #localityname, #organizationname, #email, #organizationunitname, #commonname, #selectmenu {
+  width: 300px;
+  height: 30px;
+  background-color:white;
+  font-size: 18px;
+  font-family: arial;
+  font-weight: bold;
+  border:2px solid rgb(100, 5, 5);
+  border-radius: 7px; 
+  color:rgb(100, 5, 5);
+  justify-self: end;
+}
+
+ #keyTxt, #csrTxt, #certTxt, #tprint, #serial, #receiveraddr, #abi, #contaddr, #canvas, #canvassvg  { 
+
+  background-color:white;
+  font-size: 12px;
+  font-family: arial;
+  font-weight: bold;
+  border:2px solid rgb(100, 5, 5);
+  border-radius: 7px; 
+  color:rgb(100, 5, 5);
     
-  }
+}
 
-  .Vernagir{
-    margin-top: 20px;
-    margin-bottom: 0;
-  }
-  .VernagriTak{
-    margin-top: 0px;
-  }
+#button, #textsave, #metam,  #trans, #contaddr, #receiveraddr, #setfing, #getfing { 
+
+  background-color:white;
+  font-size: 16px;
+  font-family: arial;
+  font-weight: bold;
+  border:2px solid rgb(100, 5, 5);
+  border-radius: 7px; 
+  color:rgb(100, 5, 5); 
+  width: 350px;
+  height: auto;
+ 
+}
+
+#button:hover{
+  font-size: 19px;
+  color: rgb(56, 4, 4);
+}
+
+#textsave:hover{
+  font-size: 19px;
+  color: rgb(56, 4, 4);
+}
+
+#button:active {
+  background-color: #bc48a5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#textsave:active {
+  background-color: #bc48a5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#container{
+
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+container> .reactivbut {
+  place-self: center;
+}
+
+container> #lab {
   
-  .App > #name, #countryname, #statename, #localityname, #organizationname, #email, #organizationunitname, #commonname, #selectmenu {
-    width: 300px;
-    height: 30px;
-    background-color:white;
-    font-size: 18px;
-    font-family: arial;
-    font-weight: bold;
-    border:2px solid rgb(100, 5, 5);
-    border-radius: 7px; 
-    color:rgb(100, 5, 5) 
-  }
+  justify-self: start;
+}
+
+#metacont{  
+  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+#metagrvacq{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: row1-start;
+  grid-row-end: 1;
   
-   #keyTxt, #csrTxt, #certTxt, #tprint, #serial { 
+}
 
-    background-color:white;
-    font-size: 12px;
-    font-family: arial;
-    font-weight: bold;
-    border:2px solid rgb(100, 5, 5);
-    border-radius: 7px; 
-    color:rgb(100, 5, 5) 
+
+#metam{
+  justify-self: start;
+}
+
+#trans{
+  justify-self: end;
+}
+
+#receiveraddr{
+  font-size: 15px;
+  width: 380px;
+  justify-self: end;
+}
+
+#fingercont {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+#finggrvacq1{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: row1-start;
+  grid-row-end: 1;
+  padding: 0;
+  margin-top: 35px;
+  margin-bottom: 15px;
+}
+
+#finggrvacq2{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: row2-start;
+  grid-row-end: 2;
+  padding: 0%;
+  margin-top: 0px;
+  margin-bottom: 25px;
+} 
+
+#contaddr{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: row 3;
+  grid-row-end: 3;
+  font-size: 15px;
+  width: 380px;
+  justify-self: start;
+}
+
+#abi{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: row 9;
+  grid-row-end: 12;
+  font-size: 15px;
+}
+
+#setfing{
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: row 11;
+  grid-row-end: 11;
+  justify-self: start;
+}
+
+#getfing{
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: row 11;
+  grid-row-end: 11;
+  justify-self: end;
+}
+
+#metam:hover{
+  font-size: 19px;
+  color: rgb(56, 4, 4);
+}
+
+#trans:hover{
+  font-size: 19px;
+  color: rgb(56, 4, 4);
+}
+#setfing:hover{
+  font-size: 19px;
+  color: rgb(56, 4, 4);
+}
+#getfing:hover{
+  font-size: 19px;
+  color: rgb(56, 4, 4);
+}
+
+#metam:active {
+  background-color: #bc48a5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#trans:active {
+  background-color: #bc48a5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#setfing:active {
+  background-color: #bc48a5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#getfing:active {
+  background-color: #bc48a5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#lastFingPrint{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: row 13;
+  grid-row-end: 13;
+  justify-self: center; 
+}
+
+#canvassvg  {
+  display: inline-block;
+}
+
+#canvassvg, #canvas  {
+height: 500px;
+width: 500px;
+min-height: 470px;
+min-width: 470px;
+padding: 0px;
+overflow: hidden;
+
+}
+#canvas  {
+    height: 470px;
+    width: 470px;
+    padding: 15px;
   }
 
-  #button, #textsave { 
-
-    background-color:white;
-    font-size: 18px;
-    font-family: arial;
-    font-weight: bold;
-    border:2px solid rgb(100, 5, 5);
-    border-radius: 7px; 
-    color:rgb(100, 5, 5); 
-   
-  }
-
-  #button:hover{
-    font-size: 19px;
-    color: rgb(56, 4, 4);
-  }
-
-  #textsave:hover{
-    font-size: 19px;
-    color: rgb(56, 4, 4);
-  }
-
-  #button:active {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
-
-  #textsave:active {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
-
-  

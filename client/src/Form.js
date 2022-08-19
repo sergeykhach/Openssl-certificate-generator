@@ -1,8 +1,14 @@
-import React,{ useState, useEffect } from "react";
+import React,{ useState, useEffect, Children } from "react";
 import ReactiveButton from 'reactive-button';
 import GetAccount from "./connectToMetamask";
+import registerGetFingPrint from "./GetFingPrint";
 import Pahatex from "./SavePahatex";
 import Morali from "./sendtransaction";
+import registerSetFingPrint from "./SetFingPrint";
+import QrCode from "./qrcode";
+import QrCodeToSvg from "./qrToSvg";
+import PahaPng from "./SavePahaPng"
+import QrCodeToSvgSave from "./qrToSvgSave";
 
 function Form() {
 
@@ -111,58 +117,61 @@ function Form() {
   return (
     <div>  
       <div className = "Form">
+        <div id="generate">
           <form onSubmit={handleSubmit}>
-              <label>Country Name (2 letter code) [AU]:</label>
+            <container id="container">
+              <label id="lab">Country Name (2 letter code) [AU]:</label>
               <input id="countryname" 
               type="text" 
               value={countryname}
+              maxLength = "2"
               onChange={(e) => setcountryname(e.target.value)}
               />
-              <br/>
-              <label>State or Province Name (full name) [Some-State]:</label>
+              
+              <label  id="lab">State or Province Name (full name) [Some-State]:</label>
               <input id="statename" 
               type="text"
               value={statename}
               onChange={(e) => setstatename(e.target.value)}
               />
-              <br/>
-              <label>Locality Name (eg, city):</label>
+              
+              <label id="lab">Locality Name (eg, city):</label>
               <input id="localityname" 
               type="text" 
               value={localityname}
               onChange={(e) => setlocalityname(e.target.value)}
               />
-              <br/> 
-              <label>Organization Name (eg, company):</label>
+              
+              <label id="lab">Organization Name (eg, company):</label>
               <input id="organizationname"
               type="text"
               value={organizationname}
               onChange={(e) => setorganizationname(e.target.value)}
               />
-              <br/> 
-              <label>Organization Unit Name (eg, division or unit of company):</label>
+              
+              <label id="lab">Organization Unit Name (eg, division or unit of company):</label>
               <input id="organizationunitname"
               type="text"
               value={organizationunitname}
               onChange={(e) => setorganizationunitname(e.target.value)}
               />
-              <br/> 
-              <label>Common Name (e.g. server FQDN or YOUR name):</label>
+              
+              <label id="lab">Common Name (e.g. server FQDN or YOUR name):</label>
               <input id="commonname" 
               type="text" 
               value={commonname}
               onChange={(e) => setcommonname(e.target.value)}
               />
-              <br/> 
-              <label>Email Address:</label>
+              
+              <label id="lab">Email Address:</label>
               <input id="email" 
-              type="text" 
+              type="email" 
               value={email}
               onChange={(e) => setemail(e.target.value)}
               />
-              <br/>  
-              <label>RSA Key Size:</label>
-              <div>
+              
+              <label id="lab">RSA Key Size:</label>
+              
               <select id="selectmenu" value={selected} onChange={handleChange}>
               {options.map(option => (
                   <option key={option.value} value={option.value}>
@@ -170,10 +179,10 @@ function Form() {
                   </option>
                 ))}
               </select>
-              </div>
-              <br/> 
+              <br/>
+              </container> 
               
-              <ReactiveButton
+               <ReactiveButton
                   buttonState={knopka}
                   color={'white'}
                   idleText={'Click once and wait a little to generate Key, CSR, Cerificate with Thumbprint and Serial number'}
@@ -181,7 +190,7 @@ function Form() {
                   successText={'Your data has been successfully created'}
                   errorText={'Error'}
                   type={'submit'}
-                  className={'button'}
+                  className={'reactivbut'}
                   style={{ borderRadius: '7px', 
                     fontFamily: 'arial', 
                     fontSize: '18px', 
@@ -193,7 +202,7 @@ function Form() {
                   outline={false}
                   shadow={false}
                   rounded={false}
-                  size={'large'}
+                  size={'small'}
                   block={true}
                   messageDuration={5000}
                   disabled={false}
@@ -202,8 +211,9 @@ function Form() {
                   height={null}
                   animation={true}
               />
-                            
+              <br/>       
               <div className="message">{message ? <p>{message}</p> : null}</div>
+            
           </form>           
       </div>  
         <div>
@@ -211,8 +221,8 @@ function Form() {
             <p id="keyHead">Here is the Key file text</p>
             <textarea id="keyTxt"  rows="10" cols="70" value={keyText}></textarea>
             <input id="textsave" type="button" value="Click to save the text in the key file" onClick= {() => Pahatex("keyTxt")}></input></>
-            : <><p id="keyHead">Here will be the Key file text</p>
-            <textarea id="keyTxt"  rows="10" cols="70" value={keyText}></textarea>
+            : <> <br/>
+            {/*<textarea id="keyTxt"  rows="10" cols="70" value={"Key file text"}></textarea>*/}
             </>}
           </div>
         </div>   
@@ -221,8 +231,8 @@ function Form() {
             <p id="keyHead">Here is the CSR file text</p>
             <textarea id="csrTxt"  rows="10" cols="70" value={csrText}></textarea>
             <input id="textsave" type="button" value="Click to save the text in the CSR file" onClick={() => Pahatex("csrTxt")}></input> </> 
-            : <><p id="keyHead">Here will be the CSR file text</p>
-            <textarea id="csrTxt"  rows="10" cols="70" value={csrText}></textarea>
+            : <>
+            {/*<textarea id="csrTxt"  rows="10" cols="70" value={"CSR file text"}></textarea>*/}
             </>}
             </div>  
         </div>  
@@ -230,9 +240,18 @@ function Form() {
           <div>{message ? <>
             <p id="keyHead">Here is the Certificate file text</p>
             <textarea id="certTxt"  rows="10" cols="70" value={certText}></textarea>
-            <input id="textsave" type="button" value="Click to save the text in the certificate file" onClick={() => Pahatex("certTxt")}></input></>
-            : <><p id="keyHead">Here will be the Certificate file text</p>
-            <textarea id="certTxt"  rows="10" cols="70" value={certText}></textarea>
+            <input id="textsave" type="button" value="Click to save the text in the certificate file" onClick={() => Pahatex("certTxt")}></input>
+            <br/>
+            <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode</p>
+            <canvas id="canvas" onClick={() => QrCode(certText)}></canvas>
+            <input id="textsave" type="button" value="Click to save the qrcode.png in your downloads" onClick={() => PahaPng("canvas")}></input><br/>
+            <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode in SVG format</p>
+            <h5>(Will work only if RSA key of generated certificate is 2048)</h5>
+            <div id="canvassvg" onClick={() => QrCodeToSvg(certText)}></div>
+            <input id="textsave" type="button" value="Click to save the qrcode.svg in your downloads" onClick={() => QrCodeToSvgSave(certText)}></input>
+            </>
+            : <>
+            {/*<textarea id="certTxt"  rows="10" cols="70" value={"Certificate file text"}></textarea>*/}
             </>}
             </div> 
         </div>
@@ -241,8 +260,8 @@ function Form() {
             <p id="keyHead">Here is the Certificate's serial number </p>
             <textarea id="serial"  rows="4" cols="70" value={serial}></textarea>
             <input id="textsave" type="button" value="Click to save the text in the serial number file" onClick={() => Pahatex("serial")}></input></>
-            : <><p id="keyHead">Here will be the Certificate's serial number </p>
-            <textarea id="serial"  rows="4" cols="70" value={serial}></textarea>
+            : <>
+            {/*<textarea id="serial"  rows="4" cols="70" value={"Certificate's serial number"}></textarea>*/}
             </>}
           </div> 
         </div>   
@@ -251,19 +270,30 @@ function Form() {
             <p id="keyHead">Here is the Certificate's thumbprint</p>
             <textarea id="tprint"  rows="4" cols="70" value={thumbprint}></textarea>
             <input id="textsave" type="button" value="Click to save the text in the thumbprint file" onClick={() => Pahatex("tprint")}></input></>
-            : <><p id="keyHead">Here will be the Certificate's thumbprint</p>
-            <textarea id="tprint"  rows="4" cols="70" value={thumbprint}></textarea>
+            : <>
+            {/*<textarea id="tprint"  rows="4" cols="70" value={"Certificate's thumbprint"}></textarea>*/}
             </>}
           </div> 
         </div>
         <br/>
         <div>
-                
-          <h2>Connect to Metamask and send transaction</h2>
-          <input id="commonname" type="text" placeholder="Receiver's address (no spaces)" value={receiver} onChange={e => setReceiver(e.target.value)}/>
-          <input id="textsave" type="button" value="Click to connect to Metamask" onClick={() => GetAccount()}></input>
-          <input id="textsave" type="button" value="Click to send a transaction" onClick={() => {receiver ? Morali(receiver) && setReceiver("") : alert("Input receiver's address!")}}></input> 
-          
+      </div>
+      <div id="metamask">        
+        <container id="metacont">
+          <h2 id="metagrvacq">Connect to Metamask and send transaction</h2>
+          <input id="metam" type="button" value="Click to connect to Metamask" onClick={() => GetAccount()}></input>           <input id="trans" type="button" value="Click to send a transaction" onClick={() => {receiver ? Morali(receiver) && setReceiver("") : alert("Input receiver's address!")}}></input> 
+          <input id="receiveraddr" type="text" placeholder="Receiver's address (no spaces)" value={receiver} onChange={e => setReceiver(e.target.value)}/>
+        </container>            
+      </div>
+       <div>
+          <container id="fingercont">
+          <h2 id="finggrvacq1">Set upper generated thumbprint to deployed smart contract via Metamask</h2>
+            <h2 id="finggrvacq2">or get your last set thumbprint from deployed smart contract</h2>
+            <input id="setfing" type="button" value="Set Fingerprint" onClick={() => registerSetFingPrint(thumbprint)}></input>
+            <input id="getfing" type="button" value="Get Fingerprint" onClick={() => registerGetFingPrint()}></input>
+            <div id="lastFingPrint"></div>                       
+          </container>           
+        </div>
         </div>
       <br/>     
     </div>
