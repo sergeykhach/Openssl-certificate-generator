@@ -22,6 +22,11 @@
 }
 .VernagriTak{
   margin-top: 0px;
+  margin-bottom: 0;
+}
+.VernagriTakLast{
+  margin-top: 0px;
+  margin-bottom: 10;
 }
 
 .App > #name, #countryname, #statename, #localityname, #organizationname, #email, #organizationunitname, #commonname, #selectmenu {

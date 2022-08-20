@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-const web3 = new Web3(window.web3.currentProvider);
+const web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
 
 let contractAddrOwn = "0x2d28Dafd034fAB7eF324Bbb659D669263b326373";
 let abiOwn =  [
