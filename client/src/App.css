@@ -1,72 +1,225 @@
+:root{
+  --main-radius:5px;
+  --main-padding:5px;
+}
+
 .App{
-  display: grid;
-  flex-flow: column wrap;
-  grid-template-columns: 1fr;
-  justify-items: center;
-  justify-content: center;
-  align-content: center;
-  
   font-size: 18px;
   font-family: arial;
   font-weight: bold;
   color: rgb(100, 5, 5);
-  /*nerqev background u gradient orang*/
-  background: rgb(131,58,180);
-  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,138,29,1) 0%, rgba(252,176,69,1) 100%);
- 
-}
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 100vh;
+  grid-template-rows: 0.5fr 11fr 1fr;
+  grid-template-areas: 
+    "header header header"
+    "main main main"
+    "footer footer footer";
+    grid-gap: 0.1rem;
+ }
 
-.Vernagir{
-  margin-top: 20px;
-  margin-bottom: 0;
-}
-.VernagriTak{
-  margin-top: 0px;
-  margin-bottom: 0;
-}
-.VernagriTakLast{
-  margin-top: 0px;
-  margin-bottom: 10;
-}
+  #header{
+    grid-area: header;
+    background: rgb(241,87,4);
+    background: linear-gradient(90deg, rgba(241,87,4,1) 0%, rgba(255,179,0,1) 100%);
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+    text-align: center;
+    font-size: 18px;
+    font-family: arial;
+    font-weight: bold;
+    color: rgb(100, 5, 5);
+  }
+  .Vernagir{
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .VernagriTak{
+    margin-top: 0px;
+    margin-bottom: 0;
+  }
+  .VernagriTakLast{
+    margin-top: 0px;
+    margin-bottom: 10;
+  }
 
-.App > #name, #countryname, #statename, #localityname, #organizationname, #email, #organizationunitname, #commonname, #selectmenu {
-  width: 300px;
-  height: 30px;
-  background-color:white;
-  font-size: 18px;
-  font-family: arial;
-  font-weight: bold;
-  border:2px solid rgb(100, 5, 5);
-  border-radius: 7px; 
-  color:rgb(100, 5, 5);
-  justify-self: end;
-}
-
- #keyTxt, #csrTxt, #certTxt, #tprint, #serial, #receiveraddr, #abi, #contaddr, #canvas, #canvassvg  { 
-
-  background-color:white;
-  font-size: 12px;
-  font-family: arial;
-  font-weight: bold;
-  border:2px solid rgb(100, 5, 5);
-  border-radius: 7px; 
-  color:rgb(100, 5, 5);
+  #main{
+    grid-area: main;
+    background: rgb(241,87,4);
+    background: linear-gradient(90deg, rgba(241,87,4,0.8) 0%, rgba(255,179,0,0.8) 100%);
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+    padding-left: var(--main-padding);
+    padding-right: var(--main-padding);
     
-}
+  }
 
-#button, #textsave, #metam,  #trans, #contaddr, #receiveraddr, #setfing, #getfing { 
+  #container{
 
-  background-color:white;
-  font-size: 16px;
-  font-family: arial;
-  font-weight: bold;
-  border:2px solid rgb(100, 5, 5);
-  border-radius: 7px; 
-  color:rgb(100, 5, 5); 
-  width: 350px;
-  height: auto;
- 
-}
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    justify-items: center;
+    justify-content: space-between;
+    border-radius: var(--main-radius);
+    padding-top: var(--main-padding);
+    padding-left: var(--main-padding);
+    padding-right: var(--main-padding);
+  }
+  container> #lab {  
+    justify-self: start;
+    font-size: 18px;
+    font-family: arial;
+    font-weight: bold;
+    color:rgb(100, 5, 5);
+  }
+  .App > #name, #countryname, #statename, #localityname, #organizationname, #email, #organizationunitname, #commonname, #selectmenu {
+    width: 300px;
+    height: 30px;
+    background-color:white;
+    font-size: 18px;
+    font-family: arial;
+    font-weight: bold;
+    border:2px solid rgb(100, 5, 5);
+    border-radius: 7px; 
+    color:rgb(100, 5, 5);
+    justify-self: end;
+  }
+  #keyTxt, #csrTxt, #certTxt, #tprint, #serial, #receiveraddr, #abi, #contaddr, #canvas, #canvassvg  { 
+
+    background-color:white;
+    font-size: 12px;
+    font-family: arial;
+    font-weight:bold ;
+    border:2px solid rgb(100, 5, 5);
+    border-radius: 7px; 
+    color:rgb(100, 5, 5);
+      
+  }
+
+  #button, #textsave, #metam,  #trans, #contaddr, #receiveraddr, #setfing, #getfing { 
+
+    background-color:white;
+    font-size: 15px;
+    font-family: arial;
+    font-weight: bold;
+    border:2px solid rgb(100, 5, 5);
+    border-radius: 7px; 
+    color:rgb(100, 5, 5); 
+    width: 350px;
+    height: auto;
+   
+  }
+
+  container> .reactivbut {
+    place-self: center;
+  }
+
+  #metacont{  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 0.4fr;
+    grid-template-areas: 
+      "metagrvacq metagrvacq metagrvacq"
+      "metam trans receiveraddr";
+      border-radius: var(--main-radius);
+      padding-top: var(--main-padding);
+      padding-left: var(--main-padding);
+      padding-right: var(--main-padding);
+    
+   }    
+  
+  #metagrvacq {
+    grid-area:metagrvacq;   
+    text-align: center;
+  } 
+  
+  #metam{
+    grid-area:metam;
+    
+  }
+  #trans{
+    grid-area: trans;
+    justify-self: end;
+    
+  }
+  #receiveraddr{
+    grid-area: receiveraddr;
+    justify-self: end;
+       
+  }
+
+  #fingercont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 0.4fr 0.4fr;
+    grid-template-areas: 
+      "finggrvacq1 finggrvacq1"
+      "setfing getfing"
+      "lastFingPrint lastFingPrint";
+      grid-gap: 0.1rem;
+      border-radius: var(--main-radius);
+      padding-top: var(--main-padding);
+      padding-left: var(--main-padding);
+      padding-right: var(--main-padding);
+   }    
+  
+  #finggrvacq1 {
+    grid-area:finggrvacq1;   
+    text-align:center;     
+    padding-bottom: 0;
+  } 
+   
+  #setfing{ 
+    grid-area:setfing;   
+    justify-self: start;
+  }
+  
+  #getfing{   
+    grid-area:getfing; 
+    justify-self: end;
+  }
+
+  #lastFingPrint{
+    grid-area:lastFingPrint;
+    justify-self: center;     
+  }
+  
+  #canvassvg  {
+    display: inline-block;
+  }
+  
+  #canvassvg, #canvas  {
+  height: 500px;
+  width: 500px;
+  min-height: 470px;
+  min-width: 470px;
+  padding: 0px;
+  overflow: hidden;
+  
+  }
+  #canvas  {
+      height: 470px;
+      width: 470px;
+      padding: 15px;
+    }
+    
+  #footer{
+    grid-area: footer;
+    background: rgb(241,87,4);
+    background: linear-gradient(90deg, rgba(241,87,4,1) 0%, rgba(255,179,0,1) 100%);
+    border-radius: var(--main-radius);
+    border-radius: var(--main-radius);
+    border-top: var(--main-padding);
+    text-align: center;
+    font-size: 12px;
+    font-family: arial;
+    font-weight: bold;
+    color: rgb(100, 5, 5);
+  }
+  .footer1{
+    font-size: 17px;
+  }
 
 #button:hover{
   font-size: 19px;
@@ -89,115 +242,6 @@
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
-#container{
-
-  grid-template-columns: 1fr 1fr;
-  display: grid;
-  justify-items: center;
-  justify-content: space-between;
-}
-
-container> .reactivbut {
-  place-self: center;
-}
-
-container> #lab {
-  
-  justify-self: start;
-}
-
-#metacont{  
-  grid-template-columns: 1fr 1fr 1fr;
-  display: grid;
-  justify-items: center;
-  justify-content: space-between;
-}
-
-#metagrvacq{
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row-start: row1-start;
-  grid-row-end: 1;
-  
-}
-
-
-#metam{
-  justify-self: start;
-}
-
-#trans{
-  justify-self: end;
-}
-
-#receiveraddr{
-  font-size: 15px;
-  width: 380px;
-  justify-self: end;
-}
-
-#fingercont {
-  grid-template-columns: 1fr 1fr;
-  display: grid;
-  justify-items: center;
-  justify-content: space-between;
-}
-
-#finggrvacq1{
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: row1-start;
-  grid-row-end: 1;
-  padding: 0;
-  margin-top: 35px;
-  margin-bottom: 15px;
-}
-
-#finggrvacq2{
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: row2-start;
-  grid-row-end: 2;
-  padding: 0%;
-  margin-top: 0px;
-  margin-bottom: 25px;
-} 
-
-#contaddr{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: row 3;
-  grid-row-end: 3;
-  font-size: 15px;
-  width: 380px;
-  justify-self: start;
-}
-
-#abi{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: row 9;
-  grid-row-end: 12;
-  font-size: 15px;
-}
-
-#setfing{
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: row 11;
-  grid-row-end: 11;
-  justify-self: start;
-}
-
-#getfing{
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: row 11;
-  grid-row-end: 11;
-  justify-self: end;
-}
-
 #metam:hover{
   font-size: 19px;
   color: rgb(56, 4, 4);
@@ -240,30 +284,154 @@ container> #lab {
   transform: translateY(4px);
 }
 
-#lastFingPrint{
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: row 13;
-  grid-row-end: 13;
-  justify-self: center; 
-}
-
-#canvassvg  {
-  display: inline-block;
-}
-
-#canvassvg, #canvas  {
-height: 500px;
-width: 500px;
-min-height: 470px;
-min-width: 470px;
-padding: 0px;
-overflow: hidden;
-
-}
-#canvas  {
-    height: 470px;
-    width: 470px;
-    padding: 15px;
+@media only screen and (max-width: 550px){
+  .App{
+    font-size: 14px;
+    font-family: arial;
+    font-weight: bold;
+    color: rgb(100, 5, 5);
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 11fr 1fr;
+    grid-template-areas: 
+      "header header header"
+      "main main main"
+      "footer footer footer";
+      grid-gap: 0.1rem;
+   }
+  #header{
+    grid-area: header;
   }
+  .Vernagir{
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .VernagriTak{
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 0;
+  }
+  .VernagriTakLast{
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 10;
+  }
+  #main{
+    grid-area: main;
+  }
+
+  #container> #lab {  
+    font-size: 16px;
+  }
+  
+  .App > #name, #countryname, #statename, #localityname, #organizationname, #email, #organizationunitname, #commonname, #selectmenu {
+    width: 200px;
+    height: 25px;
+    background-color:white;
+    font-size: 14px;
+    font-family: arial;
+    font-weight: bold;
+    border:2px solid rgb(100, 5, 5);
+    border-radius: 7px; 
+    color:rgb(100, 5, 5);
+    justify-self: end;
+    
+  }
+  
+  #keyTxt, #csrTxt, #certTxt, #tprint, #serial, #receiveraddr, #abi, #contaddr, #canvas, #canvassvg  { 
+    font-size: 11px; 
+             
+  }
+  #canvassvg, #canvas  {
+    height: 50px;
+    width: 50px;
+    min-height: 470px;
+    min-width: 470px;
+    padding: 0px;
+    overflow: hidden;
+  }
+  #canvassvg{
+    padding-left: 0px;
+    padding-top: 0px;
+    text-align: center;
+  }
+  
+  #footer{
+    grid-area: footer;
+  }
+ 
+  #metacont{  
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.4fr 0.4fr 0.5fr;
+    grid-template-areas: 
+      "metagrvacq"
+      "metam"
+      "trans"
+      "receiveraddr"
+      ;
+      grid-gap: 0.1rem;
+   }    
+  
+  #metagrvacq {
+    grid-area:metagrvacq;   
+    text-align:center; 
+  } 
+  
+  #metam{
+    grid-area:metam;
+    justify-self:center; 
+  }
+  
+  #receiveraddr{
+    grid-area: receiveraddr;
+    justify-self:center; 
+    text-align:center; 
+  }
+  #trans{
+    grid-area: trans;
+    justify-self: center;
+    
+  }
+   
+  #fingercont {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.2fr 0.2fr 0.4fr;
+    grid-template-areas: 
+      "finggrvacq1"
+      "setfing"
+      "getfing"
+      "lastFingPrint";
+      grid-gap: 0.1rem;
+   }    
+  
+  #finggrvacq1 {
+    grid-area:finggrvacq1;   
+    text-align:center; 
+  } 
+  
+  #setfing{ 
+    grid-area:setfing;   
+    justify-self: center;
+  }
+  
+  #getfing{   
+    grid-area:getfing; 
+    justify-self: center;
+  }
+
+  #lastFingPrint{
+    grid-area:lastFingPrint;
+    justify-self: center; 
+    font-size: smaller;
+  } 
+  .footer1{
+    font-size: 12px;
+  }
+  
+}
+ 
+
+
 
