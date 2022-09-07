@@ -9,6 +9,7 @@ import QrCode from "./qrcode";
 import QrCodeToSvg from "./qrToSvg";
 import PahaPng from "./SavePahaPng"
 import QrCodeToSvgSave from "./qrToSvgSave";
+import QrCodeToNFT from "./qrToNft";
 
 function Form() {
 
@@ -59,7 +60,7 @@ function Form() {
       e.preventDefault();
       onClickHandler();
       try {
-        let res = await fetch("https://khachoyan.com", {
+        let res = await fetch("https://khachoyan.com/key", {
           method: "POST",
           body: JSON.stringify({
               countryname: countryname,
@@ -245,6 +246,8 @@ function Form() {
             <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode</p>
             <canvas id="canvas" onClick={() => QrCode(certText)}></canvas>
             <input id="textsave" type="button" value="Click to save the qrcode.png in your downloads" onClick={() => PahaPng("canvas")}></input><br/>
+            <input id="textsave" type="button" value="save NFT" onClick={() => QrCodeToNFT()}></input>
+
             <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode in SVG format</p>
             <h5>(Will work only if RSA key of generated certificate is 2048)</h5>
             <div id="canvassvg" onClick={() => QrCodeToSvg(certText)}></div>

@@ -4,12 +4,15 @@ import { fileURLToPath } from 'url';
 import express from "express";
 import cors from "cors";
 import path from 'path';
+import * as fsJSON from 'fs'
+import { create, globSource } from 'ipfs-http-client'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const fileCsr = "nor.csr";
 const fileKey = "hhhg.key";
 const fileCert = "cert.pem";
+const ipfs = await create();
 
 const app = express();
 
@@ -31,7 +34,7 @@ app.get("/data", (req, res) => {
 });
 */
 
-app.post("/", (req, res) => {
+app.post("/key", (req, res) => {
     let data ="";
     req.on("data", (info) => {
         data += info;
@@ -202,12 +205,48 @@ app.post("/", (req, res) => {
         });
     });
 
+    app.post("/nft", async (req, res) => {
+        //stanum enq canvasic base64 encodac vor fetch einq arel u hanum enq demi masy
+        let base64Data = req.body.file.replace(/^data:image\/png;base64,/, "");
+        //base64decode enq anum
+        const buf = Buffer.from(base64Data, 'base64');
+        //grum enq fayly mer uzac teghy
+        fs.writeFileSync('/opt/ipfs_png_json/ipfs_png/pngFile_CertNFT.png', buf);
+        console.log(buf);
+
+        let CertPNG_IPFS_CID = ''
+        for await (const pngFile_CertNFT of ipfs.addAll(globSource('/opt/ipfs_png_json/ipfs_png', '**/*'))) {
+        console.log(pngFile_CertNFT)
+        CertPNG_IPFS_CID = pngFile_CertNFT.cid
+        }
+
+        const CertPNG_IPFS_URI = 'ipfs://'+CertPNG_IPFS_CID
+
+        const CertNFT_IPFS_json = {
+        'description': 'CertNFT uploaded via local IPFS',
+        'image': CertPNG_IPFS_URI,
+        'name': 'CertNFT-IPFS-local'
+        }
+        console.log(CertNFT_IPFS_json)
+
+        const jsonString_CertNFT_IPFS = JSON.stringify(CertNFT_IPFS_json)
+        fsJSON.writeFile('/opt/ipfs_png_json/ipfs_json/CertNFT_IPFS_json.json', jsonString_CertNFT_IPFS, err => {
+        if (err) {
+                console.log('Error create json file', err)
+        } else {
+                console.log('json created successfully')
+        }
+        })
+
+        let ipfsURI_CertNFT = ''
+        for await (const ipfsURI_CertNFT of ipfs.addAll(globSource('/opt/ipfs_png_json/ipfs_json','**/*'))) {
+        console.log('ipfs.io/ipfs/'+ipfsURI_CertNFT.cid)
+        }
+
+        
+        res.send("Amen inch lav e");
+        });
 
 
-/* hetaqrqira bayc nerqevi kody chi ashxatum chnayac app.use(express.json)-in
-app.post("/", (req, res) => {
-    console.log(req.body.countryname);
-    res.send("Stacel em Jsony");
-});
-*/
+
 app.listen(process.env.PORT || 60000);
