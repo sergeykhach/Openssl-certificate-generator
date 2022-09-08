@@ -240,11 +240,11 @@ app.post("/key", (req, res) => {
         let ipfsURI_CertNFT = ''
         for await (const ipfsURI_CertNFT of ipfs.addAll(globSource('/opt/ipfs_png_json/ipfs_json','**/*'))) {
         console.log('ipfs.io/ipfs/'+ipfsURI_CertNFT.cid)
-        
-        }
+           
 
         
         res.send({ipfsURI_CertNFT: 'ipfs.io/ipfs/'+ipfsURI_CertNFT.cid});
+        }
         });
 
 
