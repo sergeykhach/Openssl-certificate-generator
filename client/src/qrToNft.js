@@ -6,11 +6,14 @@ export default async function QrCodeToNFT(){
 	var canvas = document.getElementById('canvas');
 	var img_data = canvas.toDataURL('image/jpg');
 		
-	await fetch("https://khachoyan.com/nft", {
+	let resQr = await fetch("https://khachoyan.com/nft", {
 		 method: "post",
 		 headers: { "content-type": "application/json"},
 		 body: JSON.stringify({ file: img_data }) 
 		});
+		let kayf = await resQr.json();
+		console.log(kayf.ipfsURI_CertNFT);
+		document.getElementById('ipfs_URI').innerHTML = ("IPFS URI of uploaded NFT: "+ kayf.ipfsURI_CertNFT);
 		  
 }
 

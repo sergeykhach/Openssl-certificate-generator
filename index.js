@@ -212,8 +212,7 @@ app.post("/key", (req, res) => {
         const buf = Buffer.from(base64Data, 'base64');
         //grum enq fayly mer uzac teghy
         fs.writeFileSync('/opt/ipfs_png_json/ipfs_png/pngFile_CertNFT.png', buf);
-        console.log(buf);
-
+        
         let CertPNG_IPFS_CID = ''
         for await (const pngFile_CertNFT of ipfs.addAll(globSource('/opt/ipfs_png_json/ipfs_png', '**/*'))) {
         console.log(pngFile_CertNFT)
@@ -241,10 +240,11 @@ app.post("/key", (req, res) => {
         let ipfsURI_CertNFT = ''
         for await (const ipfsURI_CertNFT of ipfs.addAll(globSource('/opt/ipfs_png_json/ipfs_json','**/*'))) {
         console.log('ipfs.io/ipfs/'+ipfsURI_CertNFT.cid)
+        
         }
 
         
-        res.send("Amen inch lav e");
+        res.send({ipfsURI_CertNFT: 'ipfs.io/ipfs/'+ipfsURI_CertNFT.cid});
         });
 
 

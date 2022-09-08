@@ -97,7 +97,7 @@
       
   }
 
-  #button, #textsave, #metam,  #trans, #contaddr, #receiveraddr, #setfing, #getfing { 
+  #button, #textsave, #metam,  #trans, #contaddr, #receiveraddr, #setfing, #getfing, #clearAll { 
 
     background-color:white;
     font-size: 15px;
@@ -110,7 +110,7 @@
     height: auto;
    
   }
-
+  
   container> .reactivbut {
     place-self: center;
   }
@@ -118,8 +118,9 @@
   #metacont{  
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 0.4fr;
+    grid-template-rows: 0.4 fr 1fr 0.4fr;
     grid-template-areas: 
+      "clearAll clearAll clearAll"
       "metagrvacq metagrvacq metagrvacq"
       "metam trans receiveraddr";
       border-radius: var(--main-radius);
@@ -128,6 +129,11 @@
       padding-right: var(--main-padding);
     
    }    
+
+   #clearAll {
+    grid-area: clearAll;   
+    place-self: center;
+  }
   
   #metagrvacq {
     grid-area:metagrvacq;   
@@ -363,8 +369,9 @@
   #metacont{  
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0.4fr 0.4fr 0.5fr;
+    grid-template-rows:0.4fr 1fr 0.4fr 0.4fr 0.5fr;
     grid-template-areas: 
+      "clearAll"
       "metagrvacq"
       "metam"
       "trans"
@@ -372,6 +379,11 @@
       ;
       grid-gap: 0.1rem;
    }    
+  
+  #clearAll{
+    grid-area: clearAll;
+    text-align:center; 
+  }
   
   #metagrvacq {
     grid-area:metagrvacq;   

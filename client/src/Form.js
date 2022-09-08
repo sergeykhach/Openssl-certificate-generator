@@ -44,6 +44,11 @@ function Form() {
        setSelected(event.target.value);
   };
 
+  //clear all funkcia
+  const refreshPage = ()=>{
+    window.location.reload();
+  };
+
   //vor handle submiti popoxutyany mi arajin angma reakcia ta
   useEffect(() => {
       handleSubmit();
@@ -181,7 +186,8 @@ function Form() {
                 ))}
               </select>
               <br/>
-              </container> 
+              
+              </container>
               
                <ReactiveButton
                   buttonState={knopka}
@@ -213,10 +219,11 @@ function Form() {
                   animation={true}
               />
               <br/>
-              <br/>      
+              <br/>  
+                  
               <div className="message">{message ? <p>{message}</p> : null}</div>
             
-      </form>           
+    </form>           
       </div>  
         <div id="takicontain">
           <div>{message ? <>
@@ -244,14 +251,16 @@ function Form() {
             <input id="textsave" type="button" value="Click to save the text in the certificate file" onClick={() => Pahatex("certTxt")}></input>
             <br/>
             <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode</p>
-            <canvas id="canvas" onClick={() => QrCode(certText)}></canvas>
+            <canvas id="canvas" onClick={() => QrCode(certText)}></canvas>            
             <input id="textsave" type="button" value="Click to save the qrcode.png in your downloads" onClick={() => PahaPng("canvas")}></input><br/>
-            <input id="textsave" type="button" value="save NFT" onClick={() => QrCodeToNFT()}></input>
-
+            <input id="textsave" type="button" value="Click to save QRcode as NFT on IPFS" onClick={() => QrCodeToNFT()}></input>
+            <div id="ipfs_URI"></div>
+            
             <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode in SVG format</p>
             <h5>(Will work only if RSA key of generated certificate is 2048)</h5>
             <div id="canvassvg" onClick={() => QrCodeToSvg(certText)}></div>
             <input id="textsave" type="button" value="Click to save the qrcode.svg in your downloads" onClick={() => QrCodeToSvgSave(certText)}></input>
+            
             </>
             : <>
             {/*<textarea id="certTxt"  rows="10" cols="70" value={"Certificate file text"}></textarea>*/}
@@ -281,6 +290,7 @@ function Form() {
       </div>
       <div id="metamask">        
         <container id="metacont">
+          <button id="clearAll" onClick={refreshPage}>Clear all</button>
           <h2 id="metagrvacq">Connect to Metamask and send transaction</h2>
           <input id="metam" type="button" value="Click to connect to Metamask" onClick={() => GetAccount()}></input>      
           <input id="trans" type="button" value="Click to send a transaction" onClick={() => {receiver ? Morali(receiver) && setReceiver("") : alert("Input receiver's address!")}}></input> 
