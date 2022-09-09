@@ -253,8 +253,8 @@ function Form() {
             <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode</p>
             <canvas id="canvas" onClick={() => QrCode(certText)}></canvas>            
             <input id="textsave" type="button" value="Click to save the qrcode.png in your downloads" onClick={() => PahaPng("canvas")}></input><br/>
-            <input id="textsave" type="button" value="Click to save QRcode as NFT on IPFS" onClick={() => QrCodeToNFT()}></input>
-            <div id="ipfs_URI"></div>
+            <input id="textsave" type="button" value="Click to save QRcode as NFT" onClick={() => QrCodeToNFT()}></input>
+            <a href={"https://testnets.opensea.io/account"} target="_blank" > <div id="ipfs_URI"></div> </a>
             
             <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode in SVG format</p>
             <h5>(Will work only if RSA key of generated certificate is 2048)</h5>

@@ -243,7 +243,7 @@ app.post("/key", (req, res) => {
            
 
         
-        res.send({ipfsURI_CertNFT: 'ipfs.io/ipfs/'+ipfsURI_CertNFT.cid});
+        res.send({ipfsURI_CertNFT: 'ipfs://'+ipfsURI_CertNFT.cid});
         }
         });
 
