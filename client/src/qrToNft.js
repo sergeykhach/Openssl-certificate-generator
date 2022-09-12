@@ -6,7 +6,7 @@ const web3 = new Web3(Web3.givenProvider || 'wss://some.local-or-remote.node:854
 console.log(web3);
 
 let accounts =[];
-let contractAddrOwn = "0x0aEfA4eDb6ACdCd66EDEF5Dd671e2dd83Fd6B572" ;
+let contractAddrOwn = "0xaFB4e1ae1c492542F3575C2f0Bbda14764e4ADe6" ;
 let abiOwn= [
 	{
 		"inputs": [],
