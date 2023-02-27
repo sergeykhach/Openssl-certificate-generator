@@ -54,10 +54,12 @@ function Form() {
       handleSubmit();
   }, []);
 
+   //loadingi mi hatvacna, knopka+setknopka+reactbatony hashvi mej chi takiny
   const onClickHandler = () => {
-    setKnopka('loading');
+    setKnopka('loading');   
     setTimeout(() => {
-        setKnopka('success');
+        if (message !== undefined)
+         {setKnopka('success')};        
     }, 8000);
   }
 
@@ -115,9 +117,11 @@ function Form() {
       console.log(err);
     }     
   };
-
+  
+/*
   // loadinga grelu texteri poxaren ete undefined arjq linen textery
   if (keyText === csrText === certText === undefined) return <div>Loading...</div>
+*/
 
   //nkaruma sagh forman ira changerov
   return (
@@ -254,7 +258,7 @@ function Form() {
             <canvas id="canvas" onClick={() => QrCode(certText)}></canvas>            
             <input id="textsave" type="button" value="Click to save the qrcode.png in your downloads" onClick={() => PahaPng("canvas")}></input><br/>
             <input id="textsave" type="button" value="Click to save QRcode as NFT" onClick={() => QrCodeToNFT()}></input>
-            <a href={"https://testnets.opensea.io/account"} target="_blank" > <div id="ipfs_URI"></div> </a>
+            <a href={"https://testnets.opensea.io/account"} target="_blank" rel="noreferrer"> <div id="ipfs_URI"></div> </a>
             
             <p id="keyHead">Click on white empty area just below to get Certificate's text QRcode in SVG format</p>
             <h5>(Will work only if RSA key of generated certificate is 2048)</h5>
